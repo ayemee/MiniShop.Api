@@ -16,4 +16,16 @@ public class ProductsController(
         var products = productService.GetAvailableProducts();
         return Ok(products);
     }
+
+    [HttpGet("{id}")]
+    public ActionResult <ProductDto> GetProductById(int id)
+    {
+        var product = productService.GetProductById(id);
+        if(product == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(product);
+    }
 }

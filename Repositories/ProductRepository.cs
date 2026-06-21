@@ -12,4 +12,9 @@ public class ProductRepository(AppDbContext context): IProductRepository
     {
         return context.Products.Where(p => p.IsAvailable).ToList();
     }
+
+    public Product? GetProductById(int id)
+    {
+      return context.Products.FirstOrDefault(p => p.Id == id);
+    }
 }

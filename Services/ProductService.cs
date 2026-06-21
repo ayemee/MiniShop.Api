@@ -17,4 +17,20 @@ public class ProductService(
             Price = product.Price
         }).ToList();
     }
+
+    public ProductDto? GetProductById(int id)
+    {
+        var product = productRepository.GetProductById(id);
+
+        if(product == null)
+        {
+            return null;
+        }
+        return new ProductDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price
+        };
+    }
 }
