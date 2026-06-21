@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MiniShop.Api.Services;
+using MiniShop.Api.Dtos;
 
 namespace MiniShop.Api.Controllers;
 
@@ -10,7 +11,7 @@ public class ProductsController(
 ) : ControllerBase
 {
     [HttpGet("available")]
-    public IActionResult GetAvailableProducts()
+    public ActionResult <List<ProductDto>> GetAvailableProducts()
     {
         var products = productService.GetAvailableProducts();
         return Ok(products);

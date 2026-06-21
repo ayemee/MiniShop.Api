@@ -1,6 +1,8 @@
+using MiniShop.Api.Dtos;
+
 namespace MiniShop.Api.Services;
 
 public interface IProductService
 {
-    object GetAvailableProducts();
+    List<ProductDto> GetAvailableProducts();
 }

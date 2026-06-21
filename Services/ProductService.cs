@@ -1,3 +1,4 @@
+using MiniShop.Api.Dtos;
 using MiniShop.Api.Repositories;
 
 namespace MiniShop.Api.Services;
@@ -6,8 +7,14 @@ public class ProductService(
     IProductRepository productRepository
 ) : IProductService
 {
-    public object GetAvailableProducts()
+    public List<ProductDto> GetAvailableProducts()
     {
-        return productRepository.GetAvailableProducts();
+        var products = productRepository.GetAvailableProducts();
+
+        return products.Select(product => new ProductDto {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price
+        }).ToList();
     }
 }

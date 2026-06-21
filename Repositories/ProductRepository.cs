@@ -8,7 +8,7 @@ public class ProductRepository(AppDbContext context): IProductRepository
   
   
   {
-    public object GetAvailableProducts()
+    public List<Product> GetAvailableProducts()
     {
         return context.Products.Where(p => p.IsAvailable).ToList();
     }

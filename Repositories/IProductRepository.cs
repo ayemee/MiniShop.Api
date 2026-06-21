@@ -1,6 +1,8 @@
+using MiniShop.Api.Models;
+
 namespace MiniShop.Api.Repositories;
 
 public interface IProductRepository
 {
-    object GetAvailableProducts();
+    List<Product> GetAvailableProducts();
 }
