@@ -1,5 +1,6 @@
 using MiniShop.Api.Dtos;
 using MiniShop.Api.Repositories;
+using MiniShop.Api.Models;
 
 namespace MiniShop.Api.Services;
 
@@ -32,5 +33,53 @@ public class ProductService(
             Name = product.Name,
             Price = product.Price
         };
+    }
+
+    public ProductDto CreateProduct(CreateProductRequestDto request)
+    {
+        var product = new Product
+        {
+            Name = request.Name,
+            Price = request.Price,
+            IsAvailable = request.IsAvailable
+        };
+
+        var createdProduct = productRepository.CreateProduct(product);
+
+        return new ProductDto
+        {
+            Id = createdProduct.Id,
+            Name = createdProduct.Name,
+            Price = createdProduct.Price
+        };
+    }
+
+    public ProductDto? UpdateProduct(int id, UpdateProductRequestDto request)
+    {
+        var product = new Product
+        {
+            Name = request.Name,
+            Price = request.Price,
+            IsAvailable = request.IsAvailable
+        };
+
+        var updatedProduct = productRepository.UpdateProduct(id, product);
+
+        if (updatedProduct == null)
+        {
+            return null;
+        }
+
+        return new ProductDto
+        {
+            Id = updatedProduct.Id,
+            Name = updatedProduct.Name,
+            Price = updatedProduct.Price
+        };
+    }
+
+    public bool DeleteProduct(int id)
+    {
+        return productRepository.DeleteProduct(id);
     }
 }

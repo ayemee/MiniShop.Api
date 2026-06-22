@@ -28,4 +28,35 @@ public class ProductsController(
 
         return Ok(product);
     }
+
+    [HttpPost]
+    public ActionResult <ProductDto> CreateProduct(CreateProductRequestDto request)
+    {
+        var product = productService.CreateProduct(request);
+        return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
+    }
+
+    [HttpPut("{id}")]
+    public ActionResult <ProductDto> UpdateProduct(int id, UpdateProductRequestDto request)
+    {
+        var updatedProduct = productService.UpdateProduct(id, request);
+        if(updatedProduct == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(updatedProduct);
+    }   
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteProduct(int id)
+    {
+        var isDeleted = productService.DeleteProduct(id);
+        if(!isDeleted)
+        {
+            return NotFound();
+        }
+
+        return NoContent();
+    }
 }
